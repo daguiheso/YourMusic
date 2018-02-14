@@ -1782,10 +1782,10 @@ a:focus {
    ========================================================================== */
 
 #contact {
-	background-image: url(../img/parallax_bg/contacts.jpg);
+	background-image: url(../img/artist.jpg);
 	background-attachment: fixed !important;
 	background-repeat: no-repeat;
-	background-position: bottom center;
+	background-position: top center !important;
 	background-size: cover;
 	color: #aaa;
 	padding-top: 80px;
