@@ -1848,6 +1848,9 @@ a:focus {
 /*	  Contact Form Input Focus
 /*------------------------------------------*/
 
+#contact-form .form-control {
+    color: white !important;
+}
 .form-control:focus {
     outline: 0px none;
     box-shadow: none;

@@ -59,7 +59,7 @@
 			$('#navigation-menu').css("height", "1px").removeClass("in").addClass("collapse");
 			$('#navigation-menu').removeClass("open");
 		});
-		
+
 	});
 
 
@@ -336,7 +336,7 @@
 			});
 		};
 
-		$('#GoToHome, #GoToAbout, #GoToFeatures, #GoToWorks, #GoToTeam, #GoToPricing, #GoToBlog, #GoToContacts' ).scrollTo({ speed: 1400 });
+		$('#GoToHome, #GoToAbout, #GoToFeatures, #GoToWorks, #GoToServices, #GoToTeam, #GoToPricing, #GoToBlog, #GoToContacts' ).scrollTo({ speed: 1400 });
 
 	});
 
@@ -474,15 +474,16 @@
 		$("#our-customers").owlCarousel({
 
 			slideSpeed : 600,
-			items : 6,
-			itemsDesktop : [1199,5],
-			itemsDesktopSmall : [960,4],
+			items : 3,
+			itemsDesktop : [1199,3],
+			itemsDesktopSmall : [960,3],
 			itemsTablet: [768,3],
-			itemsMobile : [480,2],
+			itemsMobile : [480,3],
 			navigation:true,
 			pagination:false,
-			navigationText : false
-
+			navigationText : false,
+			autoplay: true,
+			autoplaySpeed: true
 		});
 
 		// Carousel Navigation
@@ -497,45 +498,6 @@
 	});
 
 
-
-	/*----------------------------------------------------*/
-	/*	Newsletter Subscribe Form
-	/*----------------------------------------------------*/
-
-	$(document).ready(function() {
-
-		"use strict";
-
-		$('#newsletter_form').submit(function() {
-			if (!valid_email_address($("#s_email").val()))
-				{
-					$(".message").html("<span style='color:red;'>The email address you entered was invalid. Please make sure you enter a valid email address to subscribe.</span>");
-				}
-			else
-				{
-					$(".message").html("<span style='color:#19acca;'>Adding your email address...</span>");
-						$.ajax({
-						url: 'subscribe.php',
-						data: $('#newsletter_form').serialize(),
-						type: 'POST',
-						success: function(msg) {
-							if(msg=="success")
-								{
-									$("#s_email").val("");
-									$(".message").html('<span style="color:#19acca;">You have successfully subscribed to our mailing list.</span>');
-								}
-							else
-								{
-									$(".message").html("<span style='color:red;'>The email address you entered was invalid. Please make sure you enter a valid email address to subscribe.</span>");
-								}
-						}
-					});
-				}
-
-				return false;
-		});
-
-	});
 
 	function valid_email_address(email) {
 		var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
