@@ -1783,7 +1783,8 @@ a:focus {
 
 #contact {
 	background-image: url(../img/artist.jpg);
-	background-attachment: fixed !important;
+	background-attachment: initial !important;
+	/* background-attachment: fixed !important; */
 	background-repeat: no-repeat;
 	background-position: top center !important;
 	background-size: cover;
@@ -1894,8 +1895,8 @@ a:focus {
    ========================================================================== */
 
 #footer {
-	padding-top: 80px;
-	padding-bottom: 60px;
+	padding-top: 40px;
+	padding-bottom: 30px;
 	background-color: #262626;
 }
 
@@ -2087,7 +2088,7 @@ a:focus {
 
 nav a#pull {
     display: none;
-}
+}fa
 
 
 
