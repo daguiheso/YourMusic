@@ -2135,4 +2135,8 @@ nav a#pull {
 	color: #fff;
 }
 
-
+.logoH {
+	width: 76px;
+	position: relative;
+	top: -17px;
+}
