@@ -510,7 +510,8 @@
 	/*	Contact Form Validation
 	/*----------------------------------------------------*/
 
-	$(document).ready(function(){
+$(document).ready(function () {
+
 
 		"use strict";
 
@@ -547,7 +548,17 @@
 								required: "Please enter no more than (2) characters"
 							},
 						}
+	});
+
+	function contactUser(name, email, city, phone, music) {
+		firebase.database().ref('users').set({
+			name: name,
+			email: email,
+			city: city,
+			phone: phone,
+			music: music
 		});
+	}
 
 	});
 
