@@ -550,15 +550,36 @@ $(document).ready(function () {
 						}
 	});
 
-	function contactUser(name, email, city, phone, music) {
-		firebase.database().ref('users').set({
-			name: name,
-			email: email,
-			city: city,
-			phone: phone,
-			music: music
+	$("#contact-form").submit(function (event) {
+		var dataJson = {};
+		var a = $("#contact-form").serializeArray();
+		$.each(a, function () {
+			if (dataJson[this.name]) {
+				if (!dataJson[this.name].push) {
+					dataJson[this.name] = [dataJson[this.name]];
+				}
+				dataJson[this.name].push(this.value || '');
+			} else
+			dataJson[this.name] = this.value || '';
 		});
-	}
+		if (dataJson.music === '¿Eres musico?' || dataJson.music === 'No soy musico')
+		dataJson.music = false;
+		else if (dataJson.music === 'Si soy musico')
+		dataJson.music = true;
+		debugger
+		firebase.database().ref('users/' + dataJson.email).set(dataJson).then(function (res) {
+
+			debugger
+		}, function (error) {
+			debugger
+		})
+		event.preventDefault();
 
 	});
+
+
+
+
+
+});
 
