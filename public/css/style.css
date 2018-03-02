@@ -2140,3 +2140,10 @@ nav a#pull {
 	position: relative;
 	top: -18px;
 }
+
+.message-validation {
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	font-size: 18px;
+}

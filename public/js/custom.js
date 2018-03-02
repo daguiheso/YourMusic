@@ -515,71 +515,79 @@ $(document).ready(function () {
 
 		"use strict";
 
-		$("#contact-form").validate({
-			rules:{
-				first_name:{
-					required: true,
-					minlength: 1,
-					maxlength: 16,
-					},
-					email:{
-						required: true,
-						email: true,
-					},
-					subject:{
-						required: true,
-						minlength: 4,
-						maxlength: 24,
-					},
-					message:{
-						required: true,
-						minlength: 2,
+	$("#contact-form").validate({
+		submitHandler: function (form) {
+			// do other things for a valid form
+			// var $this = $(form)
+			// $this.submit(function (event) {
+				var dataJson = {};
+				var a = $('#contact-form').serializeArray();
+				$.each(a, function () {
+					if (dataJson[this.name]) {
+						if (!dataJson[this.name].push) {
+							dataJson[this.name] = [dataJson[this.name]];
 						}
-					},
-					messages:{
-							first_name:{
-								required: "Please enter no more than (1) characters"
-							},
-							email:{
-								required: "We need your email address to contact you",
-								email: "Your email address must be in the format of name@domain.com"
-							},
-							message:{
-								required: "Please enter no more than (2) characters"
-							},
-						}
+						dataJson[this.name].push(this.value || '');
+					} else
+						dataJson[this.name] = this.value || '';
+				});
+				if (dataJson.music === '¿Eres musico?' || dataJson.music === 'No soy musico')
+					dataJson.music = false;
+				else if (dataJson.music === 'Si soy musico')
+					dataJson.music = true;
+
+				firebase.database().ref('users').push(dataJson).then(function (res) {
+					$('#contact-form')[0].reset();
+					$('#input_music').after("<p class='message-validation'>Gracias, Pronto nos contactaremos contigo.</p>")
+				}, function (error) {
+					debugger
+				})
+				// event.preventDefault();
+			// });
+		},
+		rules:{
+			name:{
+				required: true,
+				minlength: 1,
+				maxlength: 40,
+			},
+			email:{
+				required: true,
+				email: true,
+				maxlength: 40
+			},
+			city:{
+				required: true,
+				minlength: 1,
+				maxlength: 20,
+			},
+			phone:{
+				required: true,
+				minlength: 7,
+				maxlength: 20,
+			}
+		},
+		messages:{
+			name:{
+				required: "Por vafor ingrese un nombre valido",
+				maxlength: "Se excede el numero de caracteres"
+			},
+			email:{
+				required: "El correo es necesario",
+				email: "Your email address must be in the format of name@domain.com",
+				maxlength: "Se excede el numero de caracteres"
+			},
+			city:{
+				required: "La ciudad es requerida",
+				maxlength: "Se excede el numero de caracteres"
+			},
+			phone:{
+				required: "El telefono es requerido",
+				minlength: "Ingresa un numero valido",
+				maxlength: "Se excede el numero de caracteres"
+			}
+		}
 	});
-
-	$("#contact-form").submit(function (event) {
-		var dataJson = {};
-		var a = $("#contact-form").serializeArray();
-		$.each(a, function () {
-			if (dataJson[this.name]) {
-				if (!dataJson[this.name].push) {
-					dataJson[this.name] = [dataJson[this.name]];
-				}
-				dataJson[this.name].push(this.value || '');
-			} else
-			dataJson[this.name] = this.value || '';
-		});
-		if (dataJson.music === '¿Eres musico?' || dataJson.music === 'No soy musico')
-		dataJson.music = false;
-		else if (dataJson.music === 'Si soy musico')
-		dataJson.music = true;
-		debugger
-		firebase.database().ref('users/' + dataJson.email).set(dataJson).then(function (res) {
-
-			debugger
-		}, function (error) {
-			debugger
-		})
-		event.preventDefault();
-
-	});
-
-
-
-
 
 });
 
