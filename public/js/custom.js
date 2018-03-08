@@ -538,7 +538,7 @@ $(document).ready(function () {
 
 				firebase.database().ref('users').push(dataJson).then(function (res) {
 					$('#contact-form')[0].reset();
-					$('#input_music').after("<p class='message-validation'>Gracias, Pronto nos contactaremos contigo.</p>")
+					$('#input_music').after("<p class='message-validation'>¡Muchas Gracias! El equipo de muppler.com se contactará contigo a la menor brevedad posible.</p>")
 				}, function (error) {
 					debugger
 				})
